@@ -20,16 +20,7 @@ class Main extends Component {
                 dispatch(receiveDeckEntries(data))
             })
     }
-
-    componentDidUpdate() {
-        const { dispatch } = this.props
-
-        fetchDeckResults()
-            .then((data) => {
-                dispatch(receiveDeckEntries(data))
-            })
-    }
-
+    
     openDeck = (id, deck) => {
         this.props.navigation.navigate('DeckView', {
             deckId: id,
@@ -40,7 +31,6 @@ class Main extends Component {
     render() {
 
         const { decks, data } = this.props
-
         return (
             <View style={styles.container}>
                 <SafeAreaView>
@@ -68,6 +58,7 @@ const styles = StyleSheet.create({
 })
 
 function mapStateToProps(state) {
+
     return {
         data: state,
         decks: Object.keys(state).reverse()

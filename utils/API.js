@@ -28,8 +28,6 @@ export function addDeckTitle(title) {
 
     const deck = formatEntry(titleId, title)
 
-    console.log(JSON.stringify(deck))
-
     AsyncStorage.mergeItem(STORAGE_KEY, JSON.stringify(deck))
 
     return { titleId, deck }

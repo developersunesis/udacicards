@@ -4,7 +4,6 @@ function entries (state = {}, action){
 
     switch(action.type) {
         case RECEIVE_DECK_ENTRIES:
-
             return {
                 ...state,
                 ...action.entries
@@ -20,17 +19,20 @@ function entries (state = {}, action){
         case DELETE_DECK: 
             
             const keys = Object.keys(state)
-            
-            const newState = Array()
+            const tempState = state
+
+            state = {}
 
             keys.map((id) =>  {
-                id !== action.deckId && newState.push(state[id])
+                if(id !== action.deckId) {
+                    state[id] = tempState[id]
+                }
             })
+            console.log(action.deckId)
+            console.log(state)
 
-            return {
-                ...newState
-            }
-
+            return state
+            
         case ADD_CARD: 
 
             const { key, questions } = action.entry

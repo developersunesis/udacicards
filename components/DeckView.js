@@ -17,11 +17,11 @@ class DeckView extends Component {
 
     deleteThisDeck = (deckId) => {
         
-        deleteDeck(deckId);
-
-        this.props.dispatch(deleteDeckEntry(deckId))
-        
         this.props.navigation.goBack()
+        
+        deleteDeck(deckId);
+        
+        this.props.dispatch(deleteDeckEntry(deckId))
     }
 
     render() {
@@ -29,6 +29,11 @@ class DeckView extends Component {
         const { deckId } = this.props.route.params
 
         const { navigation, state } = this.props
+
+        if(state[deckId] === undefined){
+            // Deck was deleted
+            return (<View></View>)
+        }
 
         const { title, questions } = state[deckId]
 
